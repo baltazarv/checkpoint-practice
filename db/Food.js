@@ -1,10 +1,11 @@
 const conn = require('./conn');
 const Sequelize = conn.Sequelize;
 
-const Man = conn.define('man', {
+const Food = conn.define('food', {
   name: {
     type: Sequelize.STRING
-  }
-})
+  },
+  number: Sequelize.INTEGER
+});
 
-module.exports = Man;
+module.exports = Food;
