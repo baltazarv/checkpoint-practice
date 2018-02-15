@@ -21,7 +21,6 @@ router.get('/', (req, res, next) => {
     ]
   })
   .then(apes => {
-    // console.log(apes);
     res.status(201).send(apes);
   })
   .catch(next);
@@ -30,8 +29,8 @@ router.get('/', (req, res, next) => {
 router.get('/rename/:oldname/:newname', (req, res, next) => {
   Ape.findOne({ where: { name: req.params.oldname }})
   .then(ape => {
-    // ape.name = req.params.newname;
-    Object.assign(ape, { name: req.params.newname, gender: ape.gender });
+    ape.name = req.params.newname;
+    // Object.assign(ape, { name: req.params.newname, gender: ape.gender });
     return ape.save();
   })
   .then(ape => {
@@ -50,12 +49,23 @@ router.get('/birth/:name', (req, res, next) => {
 router.get('/kill/:id', (req, res, next) => {
   Ape.findById(req.params.id)
   .then(ape => {
-    ape.destroy()
+    ape.destroy();
   })
   .then(() => {
     res.redirect('/');
   })
   .catch(next);
 });
+
+// router.delete('/:id', (req, res, next) => {
+//   Ape.findById(req.params.id)
+//   .then(ape => {
+//     ape.destroy()
+//   })
+//   .then(() => {
+//     res.redirect('/');
+//   })
+//   .catch(next);
+// });
 
 module.exports = router;

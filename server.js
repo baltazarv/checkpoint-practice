@@ -7,6 +7,8 @@ const db = require('./db');
 db.sync()
   .then(() => db.seed());
 
+app.use(require('method-override')('_method'));
+
 app.use('/', router);
 
 app.use((err, req, res, next) => {
